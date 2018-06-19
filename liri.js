@@ -1,7 +1,7 @@
 //grab keys and dotenv file
 require("dotenv").config();
-var Twitter = require('twitter');
-var Spotify = require('node-spotify-api')
+var twitter = require('twitter');
+var spotify = require('node-spotify-api')
 var request = require('request');
 var fs = require ('fs');
 
@@ -54,3 +54,20 @@ switch(command){
     console.log("{Please enter a valid command: my-tweets, spotify-this-song, movie-this, do-what-it-says}");
     break;
 }
+
+function showTweets(){
+    //display tweets
+    var screenName = {screen_name: 'opajarillo'};
+    client.get('statuses/user_timeline', screenName , function (error, tweets, response){
+        if(!error){
+            for(var i = 0, l = i<tweets.length; i<l;i++){
+                var date = tweets[i].created_at;
+                console.log("@opajarillo: " + tweets[i].text + " Created At: " + date.substring(0, 19));
+                console.log("-----------------------");
+            }
+        }else{
+            console.log("An error occured");
+        }
+    });
+}
+
