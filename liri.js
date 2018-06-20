@@ -97,6 +97,9 @@ function omdbSearch(movie){
     var omdbURL = "http://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=79e3421b";
     
     request(omdbURL, function (error, response, body){
+        if (!movie){
+            movie = "Mr.Nobody";
+        }
         if(!error && response.statusCode == 200){
           var body = JSON.parse(body);
     
@@ -114,3 +117,12 @@ function omdbSearch(movie){
 });
 }
 
+function doIt(){
+    fs.readFile('random.txt', "utf8", function(error, data){
+        if(error){
+        return console.log(error);
+        }
+        var txt = datasplit(',');
+        spotifySong(txt[1]);
+    });
+}
