@@ -91,3 +91,26 @@ function spotifySong(song){
     }
   });
 }
+
+function omdbSearch(movie){
+    
+    var omdbURL = "http://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=79e3421b";
+    
+    request(omdbURL, function (error, response, body){
+        if(!error && response.statusCode == 200){
+          var body = JSON.parse(body);
+    
+          console.log("Title: " + body.Title);
+          console.log("Release Year: " + body.Year);
+          console.log("IMDB Rating: " + body.imdbRating);
+          console.log("Country: " + body.Country);
+          console.log("Language: " + body.Language);
+          console.log("Plot: " + body.Plot);
+          console.log("Actors: " + body.Actors);
+          console.log("Rotten Tomatoes Rating: " + body.tomatoRating);
+}else{
+    console.log('An error occurred.')
+}
+});
+}
+
